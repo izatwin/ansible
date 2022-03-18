@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create jimbo user
+    tags: always
+    user:
+      name: jimbo
+      groups: root
+  
+  - name: add ssh key for jimbo
+    tags: always
+    authorized_key:
+      user: jimbo
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBkd9xlNliTLo6T7cd7uud+duwRXiGZvKRuV1V8MnyCL ansible"
+
+  - name: add sudoers file for jimbo
+    copy:
+      src: sudoer_jimbo
+      dest: /etc/sudoers.d/jimbo
+      owner: root
+      group: root
+      mode: 0440
