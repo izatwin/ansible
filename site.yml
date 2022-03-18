@@ -12,12 +12,5 @@
 
 - hosts: minecraft
   become: true
-  tasks:
-
-  - name: download latest buildtools
-    get_url:
-      url: https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-      dest: /spigot/buildtools/BuildTools.jar
-      mode: 0644
-      owner: root
-      group: root
+  roles:
+    - minecraft
